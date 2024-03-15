@@ -128,9 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="card.h" />
+    <ClInclude Include="file.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="card.c" />
+    <ClCompile Include="file.c" />
     <ClCompile Include="main.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

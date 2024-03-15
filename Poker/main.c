@@ -1,5 +1,6 @@
 
 #include "card.h"
+#include "file.h"
 
 int main() {
     // Creating the deck
@@ -23,7 +24,8 @@ int main() {
             printf("%s,%s \n", deck[i].suit, deck[i].rank);
     }*/
 
-
+    //Testing for File I/O
+    file();
 
     
 }
