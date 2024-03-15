@@ -3,7 +3,7 @@
 
 Card* createDeck() {
 
-    //Assigning dynmaic memory to store the deck of cards 
+    //Assigning dynamic memory to store the deck of cards
     Card* deck = (Card*)malloc(NUM_SUITS * NUM_RANKS * sizeof(Card));
     if (deck == NULL) {
         printf("Memory allocation failed\n");
