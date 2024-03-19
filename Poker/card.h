@@ -8,6 +8,9 @@
 #define NUM_SUITS 4
 #define NUM_RANKS 13
 
+// Defining number of card user will get in starting (Hands)
+#define CARDS_IN_HAND 2
+
 // Defining a struct to represent a playing card
 typedef struct card{
     char* suit;
@@ -15,3 +18,6 @@ typedef struct card{
 } Card;
 
 Card* createDeck();
+void shuffleDeck(Card*);
+void dealCards(Card* deck, Card* playerHand, Card* computerHand);
+
