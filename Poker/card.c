@@ -1,8 +1,10 @@
-
+#define _CRT_SECURE_NO_WARNINGS
 #include "card.h"
 #include "poker.h"
 #include "player.h"
 #include "file.h"
+#include <string.h>
+#include <stdlib.h>
 
 #include <stdio.h>
 Card* createDeck() {
@@ -22,13 +24,22 @@ Card* createDeck() {
     int index = 0;
     for (int suit = 0; suit < NUM_SUITS; suit++) {
         for (int rank = 0; rank < NUM_RANKS; rank++) {
-            deck[index].suit = suits[suit];
-            deck[index].rank = ranks[rank];
+            //deck[index].suit = suits[suit];
+            //deck[index].rank = ranks[rank];
+            deck[index] = CreateCard(suits[suit], ranks[rank]);
             index++;
         }
     } 
 
     return deck;
+}
+
+char* getSuit(Card c) {
+    return c.suit;
+}
+
+char* getRank(Card c) {
+    return c.rank;
 }
 
 // Function to shuffle the deck of cards
@@ -120,13 +131,18 @@ void sortHand(Card* hand, int size) {
 
 Card CreateCard(char* suit, char* rank) {
     Card newCard;
-    strcpy(newCard.suit, suit);
-    strcpy(newCard.rank, rank);
+    strncpy(newCard.suit, suit, MAXNAME);
+    strncpy(newCard.rank, rank, MAXNAME);
     return newCard;
 }
 
 void printHand(Card* hand, int size) {
     for (int i = 0; i < size; i++) {
-        printf("%s of %s\n", hand[i].rank, hand[i].suit);
+        //printf("%s of %s\n", hand[i].rank, hand[i].suit);
+        printCard(hand[i]);
     }
+}
+
+void printCard(Card c) {
+    printf("%s of %s.  ", getRank(c), getSuit(c));
 }

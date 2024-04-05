@@ -43,35 +43,20 @@ void StartGame(Player p) {
 	// afterwards, three cards will be dealt to the table, inputing them into every players hand 
 
 	Card card3, card4, card5;
-	card3 = CreateCard("Diamonds", "8");
-	card4 = CreateCard("Clubs", "5");
-	card5 = CreateCard("Hearts", "Queen");
-
-	Card cardB1 = CreateCard("Hearts", "Ace");
-	Card cardB2 = CreateCard("Diamonds", "Ace");
-
-	botHand[0] = cardB1;
-	botHand[1] = cardB2;
+	//card3 = CreateCard("Diamonds", "8");
+	//card4 = CreateCard("Clubs", "5");
+	//card5 = CreateCard("Hearts", "Queen");
 
 
 
-	hand[2] = card3;
-	hand[3] = card4;
-	hand[4] = card5;
 
-	table[0] = card3;
-	table[1] = card4;
-	table[2] = card5;
 
-	botHand[2] = card3;
-	botHand[3] = card4;
-	botHand[4] = card5;
+
+
 	HandNum = 5;
 
 	// these will be dealt soon enough
 	// in reality, it will be much easier, as for each round, there will be a deal() function to randomly add
-	Card cardR2 = CreateCard("Spade", "Ace");
-	Card cardR3 = CreateCard("Hearts", "Two");
 
 
 	// This will start betting process
@@ -82,16 +67,10 @@ void StartGame(Player p) {
 
 	while (round < 4) {
 		if (round == 2) {
-			table[3] = cardR2;
-			hand[5] = cardR2;
-			botHand[5] = cardR2;
 			HandNum++;
 			tableNum++;
 		}
 		if (round == 3) {
-			table[4] = cardR3;
-			hand[6] = cardR3;
-			botHand[6] = cardR3;
 			tableNum++;
 			HandNum++;
 		}
@@ -102,7 +81,6 @@ void StartGame(Player p) {
 			printf("Your hand: ");
 			printHand(hand, 2);
 			printf("\nThis is on the table: ");
-			printHand(table, tableNum);
 			printf("\n");
 
 			printf("Your current funds: 500\n");

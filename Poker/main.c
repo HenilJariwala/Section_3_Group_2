@@ -16,8 +16,8 @@ int main() {
     Card computerHand[CARDS_IN_HAND];
     dealCards(deck, playerHand, computerHand);
 
-    sortHand(playerHand, CARDS_IN_HAND);
-    sortHand(computerHand, CARDS_IN_HAND);
+   // sortHand(playerHand, CARDS_IN_HAND);
+    //sortHand(computerHand, CARDS_IN_HAND);
 
     // Example usage of game system functions
     Player player = CreatePlayer("Ryan", "Witley");
