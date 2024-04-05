@@ -21,3 +21,4 @@ Card* createDeck();
 void shuffleDeck(Card*);
 void dealCards(Card* deck, Card* playerHand, Card* computerHand);
 
+Card CreateCard(const char* suit, const char* rank);

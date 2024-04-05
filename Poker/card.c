@@ -1,6 +1,10 @@
 
 #include "card.h"
+#include "poker.h"
+#include "player.h"
+#include "file.h"
 
+#include <stdio.h>
 Card* createDeck() {
 
     //Assigning dynmaic memory to store the deck of cards 
@@ -111,5 +115,18 @@ void sortHand(Card* hand, int size) {
                 hand[j + 1] = temp;
             }
         }
+    }
+}
+
+Card CreateCard(char* suit, char* rank) {
+    Card newCard;
+    strcpy(newCard.suit, suit);
+    strcpy(newCard.rank, rank);
+    return newCard;
+}
+
+void printHand(Card* hand, int size) {
+    for (int i = 0; i < size; i++) {
+        printf("%s of %s\n", hand[i].rank, hand[i].suit);
     }
 }
