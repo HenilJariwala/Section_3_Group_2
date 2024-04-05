@@ -1,53 +1,35 @@
 
 #include "card.h"
+#include "poker.h"
+#include "player.h"
+#include "file.h"
 
 int main() {
-    // Creating the deck
+    // Implement your main logic here
+    printf("Welcome to the Poker Game!\n");
+
+    // Example usage of functions from different modules
     Card* deck = createDeck();
-
-   /* 
-   Printing the whole */
-   for (int i = 0;i < NUM_SUITS * NUM_RANKS;i++) {
-        printf("%s \t %s \n", deck[i].suit, deck[i].rank);
-    }
-
-
-    //Shuffling the deck
     shuffleDeck(deck);
 
-
-    /*
-    Printing the whole deck after shuffling */
-    printf("\nAfter Shuffling\n");
-    for (int i = 0;i < NUM_SUITS*NUM_RANKS;i++) {       
-            printf("%s,%s \n", deck[i].suit, deck[i].rank);
-    }
-
-    // Distribute cards to players (for demonstration purposes, we'll deal to one player)
-    Card playerHand[2];
-    Card computerHand[2];
+    Card playerHand[CARDS_IN_HAND];
+    Card computerHand[CARDS_IN_HAND];
     dealCards(deck, playerHand, computerHand);
 
-   
+   // sortHand(playerHand, CARDS_IN_HAND);
+    //sortHand(computerHand, CARDS_IN_HAND);
 
-    // Sorting player's and computer's hands
-    sortHand(playerHand, CARDS_IN_HAND);
-    sortHand(computerHand, CARDS_IN_HAND);
+    // Example usage of game system functions
+    Player player = CreatePlayer("Ryan", "Witley");
+    StartGame(player);
 
-    // Displaying the player's hand
-    printf("Player's Hand:\n");
-    for (int i = 0; i < CARDS_IN_HAND; ++i) {
-        printf("%s of %s\n", playerHand[i].rank, playerHand[i].suit);
+    // Example usage of file I/O functions
+    if (file()) {
+        printf("File operation successful!\n");
+    }
+    else {
+        printf("File operation failed!\n");
     }
 
-    // Displaying the computer's hand
-    printf("\nComputer's Hand:\n");
-    for (int i = 0; i < CARDS_IN_HAND; ++i) {
-        printf("%s of %s\n", computerHand[i].rank, computerHand[i].suit);
-    }
-
-
-    // Free dynamically allocated memory
-    free(deck);
-    
+    return 0;
 }
