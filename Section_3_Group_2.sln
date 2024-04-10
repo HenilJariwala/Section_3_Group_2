@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Poker", "Poker\Poker.vcxproj", "{30DCA0AE-ED83-44E6-A86C-EB31FB8F15BB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest(Card System)", "UnitTest(Card System)\UnitTest(Card System).vcxproj", "{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{30DCA0AE-ED83-44E6-A86C-EB31FB8F15BB}.Release|x64.Build.0 = Release|x64
 		{30DCA0AE-ED83-44E6-A86C-EB31FB8F15BB}.Release|x86.ActiveCfg = Release|Win32
 		{30DCA0AE-ED83-44E6-A86C-EB31FB8F15BB}.Release|x86.Build.0 = Release|Win32
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Debug|x64.ActiveCfg = Debug|x64
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Debug|x64.Build.0 = Debug|x64
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Debug|x86.ActiveCfg = Debug|Win32
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Debug|x86.Build.0 = Debug|Win32
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Release|x64.ActiveCfg = Release|x64
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Release|x64.Build.0 = Release|x64
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Release|x86.ActiveCfg = Release|Win32
+		{3B6BBAE6-74E6-4F29-A652-A6F7E6EFB367}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

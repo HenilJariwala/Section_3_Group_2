@@ -22,7 +22,7 @@ typedef struct card{
 Card* createDeck();
 void shuffleDeck(Card*);
 void dealCards(Card* deck, Card* playerHand, Card* computerHand);
-
+void sortHand(Card* hand, int size);
 char* getSuit(Card c);
 
 char* getRank(Card c);
