@@ -11,7 +11,6 @@ Player CreatePlayer(char* fName, char* lName) {
 	p.Money = 500.00;
 	p.Wins = 0;
 	p.Losses = 0;
-	p.hand = NULL;
 	return p;
 }
 

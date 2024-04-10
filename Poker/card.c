@@ -33,6 +33,7 @@ Card* createDeck() {
 
     return deck;
 }
+int cardsTaken =0;
 
 char* getSuit(Card c) {
     return c.suit;
@@ -61,11 +62,13 @@ void dealCards(Card* deck, Card* playerHand, Card* computerHand) {
     for (int i = 0; i < CARDS_IN_HAND; ++i) {
         playerHand[i] = deck[NUM_SUITS * NUM_RANKS - 1 - i];
     }
+    cardsTaken += 2;
 
     // Deal cards to the computer
     for (int i = 0; i < CARDS_IN_HAND; ++i) {
-        computerHand[i] = deck[NUM_SUITS * NUM_RANKS - 1 - CARDS_IN_HAND - i];
+        computerHand[i] = deck[NUM_SUITS * NUM_RANKS   - cardsTaken - i];
     }
+    cardsTaken += 2;
 }
 
 void sortHand(Card* hand, int size) {
@@ -145,4 +148,10 @@ void printHand(Card* hand, int size) {
 
 void printCard(Card c) {
     printf("%s of %s.  ", getRank(c), getSuit(c));
+}
+
+Card dealTop(Card* deck) {
+    Card take = deck[NUM_RANKS * NUM_SUITS - cardsTaken -1];
+    cardsTaken++;
+    return take;
 }

@@ -9,12 +9,7 @@ int main() {
     printf("Welcome to the Poker Game!\n");
 
     // Example usage of functions from different modules
-    Card* deck = createDeck();
-    shuffleDeck(deck);
-
-    Card playerHand[CARDS_IN_HAND];
-    Card computerHand[CARDS_IN_HAND];
-    dealCards(deck, playerHand, computerHand);
+    
 
    // sortHand(playerHand, CARDS_IN_HAND);
     //sortHand(computerHand, CARDS_IN_HAND);
