@@ -17,11 +17,19 @@ void StartGame(Player p) {
 
 	Player bot = CreatePlayer("Angry", "John");
 
-	Card botHand[7];
+	//Card botHand[7];
 
 
 
-	Card hand[7];
+	//Card hand[7];
+
+	Card* deck = createDeck();
+	shuffleDeck(deck);
+
+	Card playerHand[CARDS_IN_HAND];
+	Card computerHand[CARDS_IN_HAND];
+	dealCards(deck, playerHand, computerHand);
+
 	Card table[5];
 
 	// hand starts with 2 cards
@@ -31,10 +39,10 @@ void StartGame(Player p) {
 
 	// this will be dealt, start with two random cards
 
-	Card card1 = CreateCard("Diamonds", "5");
-	Card card2 = CreateCard("Clubs", "6");
-	hand[0] = card1;
-	hand[1] = card2;
+	//Card card1 = CreateCard("Diamonds", "5");
+	//ard card2 = CreateCard("Clubs", "6");
+	//playerHand[0] = card1;
+	//Playerhand[1] = card2;
 
 	// Then it will sort and value the cards given. This is so bots may value theyre hand and bet accordingly
 
@@ -42,7 +50,7 @@ void StartGame(Player p) {
 
 	// afterwards, three cards will be dealt to the table, inputing them into every players hand 
 
-	Card card3, card4, card5;
+	//Card card3, card4, card5;
 	//card3 = CreateCard("Diamonds", "8");
 	//card4 = CreateCard("Clubs", "5");
 	//card5 = CreateCard("Hearts", "Queen");
@@ -100,7 +108,7 @@ void StartGame(Player p) {
 
 		while (checks < 3) {
 			printf("Your hand: ");
-			printHand(hand, 2);
+			printHand(playerHand, 2);
 			printf("\nThis is on the table: ");
 			//printHand(table, tableNum);
 			printf("\n");
@@ -145,8 +153,8 @@ void StartGame(Player p) {
 
 
 	}
-	int BotValue = ValueHand(botHand, HandNum);
-	int playerValue = ValueHand(hand, HandNum);
+	int BotValue = ValueHand(computerHand, HandNum);
+	int playerValue = ValueHand(playerHand, HandNum);
 
 	if (BotValue >= playerValue) {
 		printf("Bot wins");
