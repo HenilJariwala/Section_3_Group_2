@@ -163,32 +163,33 @@ int ValueRank(char* rank) {
 }
 
 int ValueHand(Card* hand, int size) {
+	int power = 0;
 	// checking top up, so royal flush first
 	if (isRoyalFlush(hand, size) == true) {
-		return 90;
+		power += 90;
 	}
 	if (isStraightFlush(hand, size) == true) {
-		return 80;
+		power += 80;
 	}
 	if (isFourKind(hand, size) == true) {
-		return 70;
+		power += 70;
 	}
 	if (isFullHouse(hand, size) == true)
-		return 60;
+		power += 60;
 	if (isStraight(hand, size) == true)
-		return 50;
+		power += 50;
 	if (isFlush(hand, size) == true) {
-		return 40;
+		power += 40;
 	}
 	if (isTriple(hand, size) == true)
-		return 30;
+		power += 30;
 	if (isDoublePair(hand, size) == true) {
-		return 20;
+		power += 20;
 	}
 	if (isPair(hand, size) == true) {
-		return 15;
+		power += 15;
 	}
-	return 14;
+	power += 14;
 
 }
 
