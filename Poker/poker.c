@@ -13,15 +13,18 @@ void StartGame(Player p) {
 	int playerBet;
 	int choice;
 
+	Card* deck = createDeck();
+	shuffleDeck(deck);
+
+	Card playerHand[7];
+	Card computerHand[7];
+
+	dealCards(deck, playerHand, computerHand);
+
 	printf("Player Name: %s\n", getFirstName(p));
 
 	Player bot = CreatePlayer("Angry", "John");
 
-	Card botHand[7];
-
-
-
-	Card hand[7];
 	Card table[5];
 
 	// hand starts with 2 cards
@@ -31,22 +34,28 @@ void StartGame(Player p) {
 
 	// this will be dealt, start with two random cards
 
-	Card card1 = CreateCard("Diamonds", "5");
-	Card card2 = CreateCard("Clubs", "6");
-	hand[0] = card1;
-	hand[1] = card2;
+	//Card card1 = CreateCard("Diamonds", "5");
+	//Card card2 = CreateCard("Clubs", "6");
+	//hand[0] = card1;
+	//hand[1] = card2;
 
 	// Then it will sort and value the cards given. This is so bots may value theyre hand and bet accordingly
 
 
 
 	// afterwards, three cards will be dealt to the table, inputing them into every players hand 
+	for (int i = 0; i < 3; i++) {
+		table[i] = dealTop(deck);
+		playerHand[i + 2] = table[i];
+		computerHand[i + 2] = table[i];
+	}
+	//table[0] = dealTop(deck);
 
-	Card card3, card4, card5;
+
+	//Card card3, card4, card5;
 	//card3 = CreateCard("Diamonds", "8");
 	//card4 = CreateCard("Clubs", "5");
 	//card5 = CreateCard("Hearts", "Queen");
-
 
 
 
@@ -67,10 +76,17 @@ void StartGame(Player p) {
 
 	while (round < 4) {
 		if (round == 2) {
+			table[tableNum ] = dealTop(deck);
+			playerHand[HandNum] = table[tableNum];
+			computerHand[HandNum] = table[tableNum];
+
 			HandNum++;
 			tableNum++;
 		}
 		if (round == 3) {
+			table[tableNum] = dealTop(deck);
+			playerHand[HandNum] = table[tableNum];
+			computerHand[HandNum] = table[tableNum];
 			tableNum++;
 			HandNum++;
 		}
@@ -79,8 +95,9 @@ void StartGame(Player p) {
 
 		while (checks < 3) {
 			printf("Your hand: ");
-			printHand(hand, 2);
+			printHand( playerHand, HandNum);
 			printf("\nThis is on the table: ");
+			printHand(table, tableNum);
 			printf("\n");
 
 			printf("Your current funds: 500\n");
@@ -116,15 +133,17 @@ void StartGame(Player p) {
 
 
 			printf("BOT TURN\n\n\n");
-
+			printf("Bot hand:");
+			printHand(computerHand, HandNum);
+			printf("\n");
 
 		}
 		round++;
 
 
 	}
-	int BotValue = ValueHand(botHand, HandNum);
-	int playerValue = ValueHand(hand, HandNum);
+	int BotValue = ValueHand(computerHand, HandNum);
+	int playerValue = ValueHand(playerHand, HandNum);
 
 	if (BotValue >= playerValue) {
 		printf("Bot wins");

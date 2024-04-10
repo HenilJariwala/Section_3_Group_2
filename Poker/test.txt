@@ -1,0 +1,8 @@
+Username: Ryan 
+Earnings: $100 
+Total Hands Won: 4
+Total Hands Lost: 8
+Resets: 1 
+Wins: 3 
+Losses: 1 
+Win/Lose Ratio: 3:1

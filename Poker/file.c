@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "card.h"
 #include "poker.h"
 #include "player.h"
@@ -6,6 +7,7 @@
 bool saveGame(char playerName[20]) {
     FILE* game = fopen("game.txt", "w+");
     if (game != NULL) //if game doesn't exist
+
     {
         fprintf(game, "Player Name: %s", playerName);
         fclose(game);
