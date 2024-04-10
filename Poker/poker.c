@@ -1,17 +1,24 @@
-#define CRT_SECURE_NO_WARNGINS_
+#define _CRT_SECURE_NO_WARNINGS
 #include "card.h"
 #include "poker.h"
 #include "player.h"
 #include "file.h"
+#include "time.h"
+#include <stdlib.h>
 // Hand struct
 
 void StartGame(Player p) {
 	// deal cards
 	int round = 1;
-	int currentBet = 50;
-	int pool;
-	int playerBet;
+	int currentBet = 0;
+	int pool = 50;
+	int playerBet = 0;
 	int choice;
+	int botBet = 0;
+	int roundRisk = 0;
+	int roundChance = 10;
+	int botFold = 0;
+	int playerFold = 0;
 
 	Card* deck = createDeck();
 	shuffleDeck(deck);
@@ -32,16 +39,6 @@ void StartGame(Player p) {
 	int HandNum = 2;
 	int tableNum = 3;
 
-	// this will be dealt, start with two random cards
-
-	//Card card1 = CreateCard("Diamonds", "5");
-	//Card card2 = CreateCard("Clubs", "6");
-	//hand[0] = card1;
-	//hand[1] = card2;
-
-	// Then it will sort and value the cards given. This is so bots may value theyre hand and bet accordingly
-
-
 
 	// afterwards, three cards will be dealt to the table, inputing them into every players hand 
 	for (int i = 0; i < 3; i++) {
@@ -49,37 +46,21 @@ void StartGame(Player p) {
 		playerHand[i + 2] = table[i];
 		computerHand[i + 2] = table[i];
 	}
-	//table[0] = dealTop(deck);
-
-
-	//Card card3, card4, card5;
-	//card3 = CreateCard("Diamonds", "8");
-	//card4 = CreateCard("Clubs", "5");
-	//card5 = CreateCard("Hearts", "Queen");
-
-
 
 
 
 
 	HandNum = 5;
 
-	// these will be dealt soon enough
-	// in reality, it will be much easier, as for each round, there will be a deal() function to randomly add
-
-
-	// This will start betting process
-
-
-	//int cardValue = ValueRank(getRank(card1));
-	//printf("%d", cardValue);
 
 	while (round < 4) {
 		if (round == 2) {
-			table[tableNum ] = dealTop(deck);
+			table[tableNum] = dealTop(deck);
 			playerHand[HandNum] = table[tableNum];
 			computerHand[HandNum] = table[tableNum];
 
+			roundRisk += 5;
+			roundChance = 30;
 			HandNum++;
 			tableNum++;
 		}
@@ -87,55 +68,116 @@ void StartGame(Player p) {
 			table[tableNum] = dealTop(deck);
 			playerHand[HandNum] = table[tableNum];
 			computerHand[HandNum] = table[tableNum];
+
+			roundRisk += 5;
+			roundChance = 50;
 			tableNum++;
 			HandNum++;
 		}
 		int checks = 0;
 		printf("Round %d\n", round);
 
-		while (checks < 3) {
+		while (checks < 2) {
 			printf("Your hand: ");
-			printHand( playerHand, HandNum);
+			printHand(playerHand, 2);
 			printf("\nThis is on the table: ");
 			printHand(table, tableNum);
 			printf("\n");
 
-			printf("Your current funds: 500\n");
+			printf("Your current funds: %f \n", getMoney(p));
+			printf("Your current bet: %d\n", playerBet);
 			printf("The current bet: %d\n", currentBet);
+			printf("The current pool: %d\n", pool);
+			int pass = 1;
+			while (pass > 0) {
+				printf("Would you like to 1. check? 2. Fold? 3. Raise. 4 Call?\n");
 
-			printf("Would you like to 1. check? 2. Fold? 3. Raise. 4 Call?\n");
 
-			scanf_s("%d", &choice);
-			// will be switch contune later on
 
-			if (choice == 1) {
-				// check to see if available, if it is pass the turn
-				checks++;
-			}
-			else if (choice == 2) {
-				// remove player from game
-				printf("You lose");
-				round = 10;
-				checks = 10;
-			}
-			else if (choice == 3) {
-				printf("What is your new bet? :");
-				scanf_s("%d", &playerBet);
-				currentBet = currentBet + playerBet;
-			}
-			else if (choice == 4) {
-				playerBet = currentBet;
-				printf("Player bet = %d", playerBet);
-			}
-			else {
-				printf("not accetpable");
-			}
+				scanf_s("%d", &choice);
+				// will be switch contune later on
 
+
+				switch (choice) {
+				case 1:
+					if (currentBet > playerBet) {
+						printf("Player bet must be equal or more than current bet\n");
+						break;
+					}
+					else {
+						checks++;
+						pass--;
+						break;
+					}
+				case 2:
+					printf("Player fold, bot Wins\n");
+					round = 10;
+					checks = 10;
+					playerFold = 1;
+					pass--;
+					break;
+				case 3:
+					printf("Raise by how much?\n");
+					scanf("%d", &choice);
+					choice = choice + currentBet;
+					if (choice > p.Money || choice < 0) {
+						printf("Unable to process\n");
+						break;
+					}
+					else {
+						playerBet = playerBet + choice;
+						pool = pool + choice;
+						currentBet += choice;
+						p.Money = p.Money - choice;
+						pass--;
+						break;
+					}
+				case 4:
+					printf("Called, new bet is: %d\n", currentBet);
+					p.Money -= currentBet;
+					playerBet += currentBet;
+					pool += currentBet;
+					checks++;
+					pass--;
+					break;
+				}
+			}
+			if (playerFold == 1) {
+				break;
+			}
 
 			printf("BOT TURN\n\n\n");
-			printf("Bot hand:");
-			printHand(computerHand, HandNum);
-			printf("\n");
+
+			int BotGuess = ValueHand(computerHand, HandNum);
+			int BotChoice = rand() % BotGuess + 1;
+
+			if (BotChoice > roundChance) {
+				printf("Bot Raises by 50\n");
+				botBet += 50;
+				pool += 50;
+				currentBet += 50;
+				checks--;
+			}
+			else if (BotChoice < roundChance && BotChoice > roundRisk && botBet < currentBet) {
+				printf("The bot calls\n");
+				int difference = currentBet - botBet;
+				botBet += difference;
+				pool += difference;
+				checks++;
+
+			}
+			else if (BotChoice < roundChance && BotChoice > roundRisk && botBet >= currentBet) {
+				printf("The bot checks\n");
+				checks++;
+			}
+			else {
+				printf("The bot folds! Player wins!\n");
+				p.Money += pool;
+				round = 10;
+
+				break;
+			}
+
 
 		}
 		round++;
@@ -144,14 +186,18 @@ void StartGame(Player p) {
 	}
 	int BotValue = ValueHand(computerHand, HandNum);
 	int playerValue = ValueHand(playerHand, HandNum);
-
-	if (BotValue >= playerValue) {
-		printf("Bot wins");
+	if (botFold == 1 || playerFold == 1) {
+		printf("");
 	}
 	else {
-		printf("Player wins");
+		if (BotValue >= playerValue) {
+			printf("Bot wins");
+		}
+		else {
+			printf("Player wins");
+			p.Money += pool;
+		}
 	}
-
 	// at the end, determine winner 
 }
 

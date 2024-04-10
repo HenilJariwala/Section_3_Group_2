@@ -18,4 +18,32 @@ char* getFirstName(Player p) {
 	return p.fName;
 }
 
+char* getLastName(Player p) {
+	return p.LName;
+}
+
+double getMoney(Player p) {
+	return p.Money;
+}
+
+void setMoney(Player p, int amount) {
+	p.Money += amount;
+}
+
+int getWins(Player p) {
+	return p.Wins;
+}
+
+void setWins(Player p) {
+	p.Wins++;
+}
+
+int getLosses(Player p) {
+	return p.Losses;
+}
+
+void setLosses(Player p) {
+	p.Losses++;
+}
+
 

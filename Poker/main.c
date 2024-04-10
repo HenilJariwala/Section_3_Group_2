@@ -5,6 +5,7 @@
 #include "file.h"
 
 int main() {
+    srand(time(NULL));
     // Implement your main logic here
     printf("Welcome to the Poker Game!\n");
 
