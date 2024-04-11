@@ -1,6 +1,7 @@
 #pragma once
 #pragma once
 #include "Card.h"
+#include "player.h"
 #include <stdbool.h>
 
 int ValueCard(Card* hand);

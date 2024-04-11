@@ -25,6 +25,7 @@
     <RootNamespace>UnitTestCardSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
+    <ProjectName>UnitTesting</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -157,6 +158,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Poker\card.c" />
+    <ClCompile Include="..\Poker\file.c" />
+    <ClCompile Include="..\Poker\player.c" />
+    <ClCompile Include="..\Poker\poker.c" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -167,6 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Poker\card.h" />
+    <ClInclude Include="..\Poker\file.h" />
+    <ClInclude Include="..\Poker\player.h" />
+    <ClInclude Include="..\Poker\poker.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

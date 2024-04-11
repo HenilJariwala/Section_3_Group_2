@@ -5,6 +5,7 @@
 #include "file.h"
 #include <string.h>
 #include <stdlib.h>
+//#include <cstring>
 
 #include <stdio.h>
 Card* createDeck() {
@@ -95,7 +96,7 @@ void sortHand(Card* hand, int size) {
                     hand[j] = hand[j + 1];
                     hand[j + 1] = temp;
                 }
-                else if (strcmp(hand[j].rank, "King") == 0 && (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") != 0)) {
+                else if (strcmp(hand[j].rank, "King") == 0 && (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") != 0) ) {
                     temp = hand[j];
                     hand[j] = hand[j + 1];
                     hand[j + 1] = temp;
