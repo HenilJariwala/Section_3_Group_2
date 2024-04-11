@@ -32,3 +32,5 @@ Card CreateCard( char* suit, char* rank);
 void printHand(Card* deck, int size);
 
 void printCard(Card c);
+
+Card dealTop(Card* deck);

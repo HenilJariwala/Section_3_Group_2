@@ -11,12 +11,39 @@ Player CreatePlayer(char* fName, char* lName) {
 	p.Money = 500.00;
 	p.Wins = 0;
 	p.Losses = 0;
-	p.hand = NULL;
 	return p;
 }
 
 char* getFirstName(Player p) {
 	return p.fName;
+}
+
+char* getLastName(Player p) {
+	return p.LName;
+}
+
+double getMoney(Player p) {
+	return p.Money;
+}
+
+void setMoney(Player p, int amount) {
+	p.Money += amount;
+}
+
+int getWins(Player p) {
+	return p.Wins;
+}
+
+void setWins(Player p) {
+	p.Wins++;
+}
+
+int getLosses(Player p) {
+	return p.Losses;
+}
+
+void setLosses(Player p) {
+	p.Losses++;
 }
 
 
