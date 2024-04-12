@@ -6,6 +6,14 @@
 
 int main() {
     srand(time(NULL));
+    if (file()) {
+        printf("File operation successful!\n");
+    }
+    else {
+        printf("File operation failed!\n");
+    }
+
+
     // Implement your main logic here
     printf("Welcome to the Poker Game!\n");
 
@@ -20,12 +28,7 @@ int main() {
     StartGame(player);
 
     // Example usage of file I/O functions
-    if (file()) {
-        printf("File operation successful!\n");
-    }
-    else {
-        printf("File operation failed!\n");
-    }
+   
 
     return 0;
 }

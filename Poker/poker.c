@@ -90,7 +90,7 @@ void StartGame(Player p) {
 			printf("The current pool: %d\n", pool);
 			int pass = 1;
 			while (pass > 0) {
-				printf("Would you like to 1. check? 2. Fold? 3. Raise. 4 Call?\n");
+				printf("Would you like to 1. check? 2. Fold? 3. Raise? 4. Call?\n");
 
 
 
@@ -174,6 +174,7 @@ void StartGame(Player p) {
 				printf("The bot folds! Player wins!\n");
 				p.Money += pool;
 				round = 10;
+				botFold = 1;
 
 				break;
 			}
@@ -223,31 +224,40 @@ int ValueHand(Card* hand, int size) {
 	int power = 0;
 	// checking top up, so royal flush first
 	if (isRoyalFlush(hand, size) == true) {
-		power += 90;
+		//power = 90;
+		return 90;
 	}
 	if (isStraightFlush(hand, size) == true) {
-		power += 80;
+		//power += 80;
+		return 80;
 	}
 	if (isFourKind(hand, size) == true) {
-		power += 70;
+		//power += 70;
+		return 70;
 	}
 	if (isFullHouse(hand, size) == true)
-		power += 60;
+		return 60;
+		//power += 60;
 	if (isStraight(hand, size) == true)
-		power += 50;
+		return 50;
+		//power += 50;
 	if (isFlush(hand, size) == true) {
-		power += 40;
+		return 40;
+		//power += 40;
 	}
 	if (isTriple(hand, size) == true)
-		power += 30;
+		return 30;
+		//power += 30;
 	if (isDoublePair(hand, size) == true) {
-		power += 20;
+		//power += 
+			return 20;
 	}
 	if (isPair(hand, size) == true) {
-		power += 15;
+		//power += 15;
+		return 15;
 	}
-	power += 14;
-
+	 return 14;
+	//return power;
 }
 
 
