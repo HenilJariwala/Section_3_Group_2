@@ -498,9 +498,7 @@ namespace UnitTestCardSystem
             for (int i = 0; i < NUM_SUITS * NUM_RANKS; ++i) {
                 Assert::IsNotNull(deck[i].suit);
                 Assert::IsNotNull(deck[i].rank);
-            }
-
-           
+            }          
 
             delete[] deck;
         }
