@@ -94,29 +94,36 @@ void sortHand(Card* hand, int size) {
             if (suitIndex1 == suitIndex2) {
                 
                 // Special handling for face cards
-                if (strcmp(hand[j].rank, "Ace") == 0 && strcmp(hand[j + 1].rank, "Ace") != 0) {
-                    temp = hand[j];
-                    hand[j] = hand[j + 1];
-                    hand[j + 1] = temp;
+                if (strcmp(hand[j].rank, "Ace") == 0) {
+                    if (strcmp(hand[j + 1].rank, "Ace") != 0) {  
+                        temp = hand[j];
+                        hand[j] = hand[j + 1];
+                        hand[j + 1] = temp;
+                    }
                 }
-                else if (strcmp(hand[j].rank, "King") == 0 && (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") != 0) ) {
-                    temp = hand[j];
-                    hand[j] = hand[j + 1];
-                    hand[j + 1] = temp;
+                else if (strcmp(hand[j].rank, "King") == 0) {
+                    if (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") != 0) {  
+                        temp = hand[j];
+                        hand[j] = hand[j + 1];
+                        hand[j + 1] = temp;
+                    }
                 }
-                else if (strcmp(hand[j].rank, "Queen") == 0 && (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") !=0 && strcmp(hand[j + 1].rank, "Queen") != 0 )) {
-                    temp = hand[j];
-                    hand[j] = hand[j + 1];
-                    hand[j + 1] = temp;
+                else if (strcmp(hand[j].rank, "Queen") == 0) {
+                    if (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") != 0 && strcmp(hand[j + 1].rank, "Queen") != 0) {  
+                        temp = hand[j];
+                        hand[j] = hand[j + 1];
+                        hand[j + 1] = temp;
+                    }
                 }
-                else if (strcmp(hand[j].rank, "Jack") == 0 && (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King")!=0 && strcmp(hand[j + 1].rank, "Queen") != 0 && strcmp(hand[j + 1].rank, "Jack") != 0)) {
-                    temp = hand[j];
-                    hand[j] = hand[j + 1];
-                    hand[j + 1] = temp;
+                else if (strcmp(hand[j].rank, "Jack") == 0) {
+                    if (strcmp(hand[j + 1].rank, "Ace") != 0 && strcmp(hand[j + 1].rank, "King") != 0 && strcmp(hand[j + 1].rank, "Queen") != 0 && strcmp(hand[j + 1].rank, "Jack") != 0) {  
+                        temp = hand[j];
+                        hand[j] = hand[j + 1];
+                        hand[j + 1] = temp;
+                    }
                 }
-
                 // Comparing ranks as strings
-                else if (strcmp(hand[j].rank, hand[j + 1].rank) > 0) {
+                else if (strcmp(hand[j].rank, hand[j + 1].rank) < 0) {
                     // Swaping if current card should come after next card
                     temp = hand[j];
                     hand[j] = hand[j + 1];

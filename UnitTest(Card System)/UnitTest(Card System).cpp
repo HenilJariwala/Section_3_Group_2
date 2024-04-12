@@ -196,8 +196,8 @@ namespace UnitTestCardSystem
             };
 
             Card expectedSortedHand[CARDS_IN_HAND] = {
-                {"Spades", "Queen"},
-                {"Spades", "Ace"}
+                {"Spades", "Ace"},
+                {"Spades", "Queen"}
             };
 
             // Making a copy of the unsorted hand for comparison
@@ -379,7 +379,7 @@ namespace UnitTestCardSystem
             // Checking if the hand is not NULL
             Assert::IsNotNull(unsortedHand);
 
-            // Ensure the hand is sorted correctly
+            // Ensuring the hand is sorted correctly
             for (int i = 0; i < CARDS_IN_HAND; ++i) {
                 Assert::AreEqual(expectedSortedHand[i].suit, unsortedHand[i].suit);
                 Assert::AreEqual(expectedSortedHand[i].rank, unsortedHand[i].rank);
@@ -388,20 +388,19 @@ namespace UnitTestCardSystem
 
         TEST_METHOD(TC004_TestGameIntegration)
         {
-            // Step 1: Input a set of cards into the system using the createDeck function
+            
             Card* deck = createDeck();
 
             // Checking if the deck is not NULL
             Assert::IsNotNull(deck);
 
-            // Step 2: Trigger the calculation of card values
-            // We will create a sample hand of cards
+            
             Card hand[] = {
                 {"Spades", "Ace"},
                 {"Hearts", "2"}
             };
 
-            // Calculate the value of the hand
+            // Calculating the value of the hand
             int handValue = ValueHand(hand, sizeof(hand) / sizeof(hand[0]));
 
             // Expected hand value based on poker rules (mocked for simplicity)
@@ -410,7 +409,6 @@ namespace UnitTestCardSystem
             // Checking if the calculated hand value matches the expected value
             Assert::AreEqual(expectedHandValue, handValue);
 
-            // Step 3: Trigger the distribution of cards to players using the dealCards function
             Card playerHand[CARDS_IN_HAND];
             Card computerHand[CARDS_IN_HAND];
 
@@ -420,7 +418,7 @@ namespace UnitTestCardSystem
             Assert::IsNotNull(playerHand);
             Assert::IsNotNull(computerHand);
 
-            // Additional assertions can be added to verify specific game rules and distribution logic
+            
         }
 
         TEST_METHOD(TC005_GameIntegrationTest)
@@ -432,7 +430,7 @@ namespace UnitTestCardSystem
             player.Money = 150;
 
             // Step 2: Trigger the output of player data
-            bool result = saveGame(getFirstName(player));
+            bool result = saveGame(player.fName, player.Money, player.Wins, player.Losses);
 
             // Step 3: Verifying that player data is correctly outputted
             Assert::IsTrue(result);
@@ -461,18 +459,22 @@ namespace UnitTestCardSystem
         {
             // Step 1: Simulating game data with player statistics
             char playerName[20] = "Player1";
-            // Simulating player statistics here if needed
+            float playerEarnings = 100.0;
+            int playerWins = 4;
+            int playerLosses = 8;
 
             // Step 2: Invoking the "saveGame" function to save the game data
-            bool saved = saveGame(playerName);
+            bool saved = saveGame(playerName, playerEarnings, playerWins, playerLosses);
 
-            // Checking if the game data is saved successfully
+            // Step 3: Checking if the game data is saved successfully
             Assert::IsTrue(saved);
 
+            // Step 4: Verifying that the saved file exists
             FILE* savedFile = fopen("game.txt", "r");
             Assert::IsNotNull(savedFile);
             fclose(savedFile);
         }
+
 
         TEST_METHOD(TC008_CreateDeckTest)
         {
@@ -503,22 +505,26 @@ namespace UnitTestCardSystem
             delete[] deck;
         }
 
-        //TEST_METHOD(TC009_LoadGameTest)
-        //{
-        //    // Step 1: Simulating a previously saved game with player statistics
-        //    std::string savedGameData = "Player Name: Player1\nWins: 5\nLosses: 3\nScore: 150\n";
+        TEST_METHOD(TC009_LoadGameTest)
+        {
+            // Step 1: Simulating a previously saved game with player statistics
+            std::string savedGameData = "Player Name: Player1\nEarnings: 100.000000\nWins: 4\nLosses: 8\n";
 
-        //    // Step 2: Invoking the "loadGame" function to load the saved game data
-        //    std::string playerName;
-        //    int wins = 0, losses = 0, score = 0;
-        //    bool result = loadGame(savedGameData, playerName, wins, losses, score);
+            // Step 2: Save the simulated game data to a file
+            FILE* game = fopen("game.txt", "w+");
+            if (game != nullptr)
+            {
+                fprintf(game, savedGameData.c_str());
+                fclose(game);
+            }
 
-        //    // Step 3: Verifying that the player statistics are correctly loaded
-        //    Assert::IsTrue(result); // Assert that the loading operation was successful
-        //    Assert::AreEqual(std::string("Player1"), playerName); // Assert that the player name matches the saved data
-        //    Assert::AreEqual(5, wins); // Assert that the number of wins matches the saved data
-        //    Assert::AreEqual(3, losses); // Assert that the number of losses matches the saved data
-        //    Assert::AreEqual(150, score); // Assert that the score matches the saved data
-        //}
+            // Step 3: Invoking the "loadGame" function to load the saved game data
+            bool result = loadGame();
+
+            // Step 4: Verifying that the player statistics are correctly loaded
+            Assert::IsTrue(result); // Assert that the loading operation was successful
+        }
+
+
 	};
 }

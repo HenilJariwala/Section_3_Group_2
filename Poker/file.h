@@ -5,7 +5,7 @@
 
 #define MAX_NAME 20
 
-bool saveGame(char playerName[MAX_NAME]);
+//bool saveGame(char playerName[MAX_NAME]);
 
 bool saveGame(char characterName[MAX_NAME], float characterEarnings, int characterWins, int characterLosses);
 
