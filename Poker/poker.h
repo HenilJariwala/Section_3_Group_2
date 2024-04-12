@@ -1,5 +1,6 @@
 #pragma once
 #include "Card.h"
+#include "player.h"
 #include <stdbool.h>
 #include "Player.h"
 
