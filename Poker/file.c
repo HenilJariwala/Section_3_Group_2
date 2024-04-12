@@ -4,7 +4,7 @@
 #include "player.h"
 #include "file.h"
 
-bool file()
+bool file() // For testing
 {
 	FILE* file = fopen("test.txt", "w+");
 	if (file != NULL)
@@ -55,7 +55,7 @@ bool loadGame()
 bool deleteGame(char fileName[MAX_NAME])
 {
 	printf("Enter the name of the file you want to delete: ");
-	scanf_s("%s", &fileName);
+	scanf_s("%s", &fileName, MAX_NAME);
 	if (remove(fileName) == 0)
 	{
 		printf("File deleted");

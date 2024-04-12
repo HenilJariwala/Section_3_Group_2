@@ -33,6 +33,9 @@
     <ClCompile Include="..\Poker\poker.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UnitTest(Character Creation and Saving System).cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
