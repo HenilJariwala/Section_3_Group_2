@@ -19,7 +19,7 @@ namespace UnitTestCardSystem
     {
     public:
 
-		TEST_METHOD(TC010_Passing) // Testing file()
+		TEST_METHOD(TC010) // Testing file()
 		{
 			bool expected = true;
 			bool actual = file();
