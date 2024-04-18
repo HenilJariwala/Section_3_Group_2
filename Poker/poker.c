@@ -7,7 +7,7 @@
 #include <stdlib.h>
 // Hand struct
 
-void StartGame(Player p) {
+ void StartGame(Player* p) {
 	// deal cards
 	int round = 1;
 	int currentBet = 0;
@@ -28,7 +28,7 @@ void StartGame(Player p) {
 
 	dealCards(deck, playerHand, computerHand);
 
-	printf("Player Name: %s\n", getFirstName(p));
+	printf("Player Name: %s\n", getFirstName(*p));
 
 	Player bot = CreatePlayer("Angry", "John");
 
@@ -97,49 +97,61 @@ void StartGame(Player p) {
 				scanf_s("%d", &choice);
 				// will be switch contune later on
 
+				if (choice < 0) {
+					choice = 1;
+				   printf("invalid input");
+				   scanf_s("%d", &choice);
+				}
+				else {
 
-				switch (choice) {
-				case 1:
-					if (currentBet > playerBet) {
-						printf("Player bet must be equal or more than current bet\n");
+
+					switch (choice) {
+					case 1:
+						if (currentBet > playerBet) {
+							printf("Player bet must be equal or more than current bet\n");
+							break;
+						}
+						else {
+							checks++;
+							pass--;
+							break;
+						}
+					case 2:
+						printf("Player fold, bot Wins\n");
+						round = 10;
+						checks = 10;
+						playerFold = 1;
+						pass--;
+						p->Losses++;
 						break;
-					}
-					else {
+					case 3:
+						printf("Raise by how much?\n");
+						scanf("%d", &choice);
+						choice = choice + currentBet;
+						if (choice > p->Money || choice < 0) {
+							printf("Unable to process\n");
+							break;
+						}
+						else {
+							playerBet = playerBet + choice;
+							pool = pool + choice;
+							currentBet += choice;
+							p->Money = p->Money - choice;
+							pass--;
+							break;
+						}
+					case 4:
+						printf("Called, new bet is: %d\n", currentBet);
+						p->Money -= currentBet;
+						playerBet += currentBet;
+						pool += currentBet;
 						checks++;
 						pass--;
 						break;
+					default:
+						printf("Not available number\n");
+						choice = 0;
 					}
-				case 2:
-					printf("Player fold, bot Wins\n");
-					round = 10;
-					checks = 10;
-					playerFold = 1;
-					pass--;
-					break;
-				case 3:
-					printf("Raise by how much?\n");
-					scanf("%d", &choice);
-					choice = choice + currentBet;
-					if (choice > p.Money || choice < 0) {
-						printf("Unable to process\n");
-						break;
-					}
-					else {
-						playerBet = playerBet + choice;
-						pool = pool + choice;
-						currentBet += choice;
-						p.Money = p.Money - choice;
-						pass--;
-						break;
-					}
-				case 4:
-					printf("Called, new bet is: %d\n", currentBet);
-					p.Money -= currentBet;
-					playerBet += currentBet;
-					pool += currentBet;
-					checks++;
-					pass--;
-					break;
 				}
 			}
 			if (playerFold == 1) {
@@ -172,7 +184,9 @@ void StartGame(Player p) {
 			}
 			else {
 				printf("The bot folds! Player wins!\n");
-				p.Money += pool;
+				p->Money += pool;
+				p->Wins++;
+				printf("New earnings: %f", p->Money);
 				round = 10;
 				botFold = 1;
 
@@ -196,7 +210,7 @@ void StartGame(Player p) {
 		}
 		else {
 			printf("Player wins");
-			p.Money += pool;
+			p->Money += pool;
 		}
 	}
 	// at the end, determine winner 

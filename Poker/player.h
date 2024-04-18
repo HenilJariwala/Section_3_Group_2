@@ -10,7 +10,6 @@ typedef struct Player {
 	double Money;
 	int Wins;
 	int Losses;
-	Card* hand;
 }Player;
 
 Player CreatePlayer(char*, char*);

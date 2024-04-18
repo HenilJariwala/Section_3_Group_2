@@ -10,7 +10,7 @@ int ValueRank(char*);
 
 int ValueHand(Card* hand, int num);
 
-void StartGame(Player);
+void StartGame(Player*);
 
 bool isPair(Card* hand, int size);
 
