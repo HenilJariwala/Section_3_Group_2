@@ -4,7 +4,7 @@
 #include "player.h"
 #include "file.h"
 
-bool file()
+bool file() // For testing
 {
 	FILE* file = fopen("test.txt", "w+");
 	if (file != NULL)
@@ -19,12 +19,13 @@ bool file()
 
 }
 
-bool saveGame(char characterName[MAX_NAME], float characterEarnings, int characterWins, int characterLosses)
+bool saveGame(char characterFirstName[MAX_NAME], char characterLastName[MAX_NAME], float characterEarnings, int characterWins, int characterLosses)
 {
 	FILE* game = fopen("game.txt", "w+");
 	if (game != NULL) //if game does exist
 	{
-		fprintf(game, "Player Name: %s\n", characterName);
+		fprintf(game, "Player First Name: %s\n", characterFirstName);
+		fprintf(game, "Player First Name: %s\n", characterLastName);
 		fprintf(game, "Earnings: %f\n", characterEarnings);
 		fprintf(game, "Wins: %d\n", characterWins);
 		fprintf(game, "Losses: %d\n", characterLosses);
@@ -35,18 +36,18 @@ bool saveGame(char characterName[MAX_NAME], float characterEarnings, int charact
 		return false;
 }
 
-bool loadGame()
+bool loadGame(char fileName[MAX_NAME])
 {
-	FILE* game = fopen("game.txt", "r");
+	FILE* game = fopen(fileName, "r");
 	char fileContent[100];
 	if (game != NULL) //if game does exist
 	{
 		while (fgets(fileContent, 100, game)) // reads every line of the file
 		{
 			printf("%s", fileContent); // print file content
-			return true;
 		}
 		fclose(game);
+		return true;
 	}
 	else
 		return false;
@@ -54,8 +55,7 @@ bool loadGame()
 
 bool deleteGame(char fileName[MAX_NAME])
 {
-	printf("Enter the name of the file you want to delete: ");
-	scanf_s("%s", &fileName);
+
 	if (remove(fileName) == 0)
 	{
 		printf("File deleted");

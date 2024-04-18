@@ -1,8 +1,8 @@
 #pragma once
-#pragma once
 #include "Card.h"
 #include "player.h"
 #include <stdbool.h>
+#include "Player.h"
 
 int ValueCard(Card* hand);
 
