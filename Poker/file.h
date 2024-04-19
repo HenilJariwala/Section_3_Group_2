@@ -7,8 +7,8 @@
 
 bool file();
 
-bool saveGame(char characterName[MAX_NAME], float characterEarnings, int characterWins, int characterLosses);
+bool saveGame(char characterFirstName[MAX_NAME], char characterLastName[MAX_NAME], float characterEarnings, int characterWins, int characterLosses);
 
-bool loadGame();
+bool loadGame(char fileName[MAX_NAME]);
 
 bool deleteGame(char fileName[MAX_NAME]);

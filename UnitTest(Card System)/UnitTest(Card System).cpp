@@ -424,16 +424,18 @@ namespace UnitTestCardSystem
         TEST_METHOD(TC005_GameIntegrationTest)
         {
             // Step 1: Input player data into the system
-            Player player = CreatePlayer("Player1", "Lastname");
-            player.Wins = 5;
-            player.Losses = 3;
-            player.Money = 150;
+            char firstName[MAX_NAME] = "Player1";
+            char lastName[MAX_NAME] = "Lastname";
+            float earnings = 150.0f;
+            int wins = 5;
+            int losses = 3;
+            bool expected = true;
 
             // Step 2: Trigger the output of player data
-            bool result = saveGame(player.fName, player.Money, player.Wins, player.Losses);
+            bool result = saveGame(firstName, lastName, earnings, wins, losses);
 
             // Step 3: Verifying that player data is correctly outputted
-            Assert::IsTrue(result);
+            Assert::AreEqual(expected, result);
         }
 
         TEST_METHOD(TC006_DealCardsTest)
@@ -458,13 +460,14 @@ namespace UnitTestCardSystem
         TEST_METHOD(TC007_SaveGameTest)
         {
             // Step 1: Simulating game data with player statistics
-            char playerName[20] = "Player1";
-            float playerEarnings = 100.0;
+            char playerName[MAX_NAME] = "Player1";
+            char playerLastName[MAX_NAME] = "Lastname";
+            float playerEarnings = 100.0f;
             int playerWins = 4;
             int playerLosses = 8;
 
             // Step 2: Invoking the "saveGame" function to save the game data
-            bool saved = saveGame(playerName, playerEarnings, playerWins, playerLosses);
+            bool saved = saveGame(playerName, playerLastName, playerEarnings, playerWins, playerLosses);
 
             // Step 3: Checking if the game data is saved successfully
             Assert::IsTrue(saved);
@@ -474,7 +477,6 @@ namespace UnitTestCardSystem
             Assert::IsNotNull(savedFile);
             fclose(savedFile);
         }
-
 
         TEST_METHOD(TC008_CreateDeckTest)
         {
@@ -498,9 +500,7 @@ namespace UnitTestCardSystem
             for (int i = 0; i < NUM_SUITS * NUM_RANKS; ++i) {
                 Assert::IsNotNull(deck[i].suit);
                 Assert::IsNotNull(deck[i].rank);
-            }
-
-           
+            }          
 
             delete[] deck;
         }
@@ -519,7 +519,7 @@ namespace UnitTestCardSystem
             }
 
             // Step 3: Invoking the "loadGame" function to load the saved game data
-            bool result = loadGame();
+            bool result = loadGame("game.txt");
 
             // Step 4: Verifying that the player statistics are correctly loaded
             Assert::IsTrue(result); // Assert that the loading operation was successful
